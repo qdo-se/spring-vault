@@ -1,0 +1,21 @@
+/target/
+tmp/
+*.log
+*.log.*
+quick_create_report/**/index.html
+quick_create_report/**/quick_create.js
+build/
+.gradle/
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+
+# Build server keeps this around - let's ignore it instead
+caches/
+daemon/
+native/
+notifications/
+wrapper/
+!gradle/wrapper

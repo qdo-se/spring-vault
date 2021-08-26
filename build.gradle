@@ -1,0 +1,47 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id "org.springframework.boot" version "2.5.4"
+    id 'java'
+    id 'java-library'
+    id 'application'
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+wrapper {
+    gradleVersion "6.7"
+}
+
+group 'qdo.vault'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(platform('org.springframework.boot:spring-boot-dependencies:2.4.5'))
+    implementation("org.springframework.boot:spring-boot-starter")
+
+    implementation("org.springframework.vault:spring-vault-dependencies:2.3.2")
+    implementation("org.springframework.vault:spring-vault-core:2.3.2")
+
+    // Use JUnit test framework.
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'qdo.vault.SpringVaultApplication'
+        )
+    }
+}
