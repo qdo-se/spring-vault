@@ -38,7 +38,8 @@ test {
     useJUnitPlatform()
 }
 
-jar {
+// TODO Add hash and datetime
+bootJar {
     manifest {
         attributes(
                 'Main-Class': 'qdo.vault.SpringVaultApplication'
