@@ -1,4 +1,5 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 plugins {
     id "org.springframework.boot" version "2.5.4"
@@ -23,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform('org.springframework.boot:spring-boot-dependencies:2.4.5'))
+    implementation(platform('org.springframework.boot:spring-boot-dependencies:2.5.4'))
     implementation("org.springframework.boot:spring-boot-starter")
 
     implementation("org.springframework.vault:spring-vault-dependencies:2.3.2")
@@ -38,11 +39,12 @@ test {
     useJUnitPlatform()
 }
 
-// TODO Add hash and datetime
 bootJar {
     manifest {
         attributes(
-                'Main-Class': 'qdo.vault.SpringVaultApplication'
+                "Implementation-Version": "1.0.0",
+                "Implementation-Build": 'git rev-parse --verify --short HEAD'.execute().text.trim(),
+                "Implementation-Timestamp": LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         )
     }
 }
