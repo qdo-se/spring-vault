@@ -27,7 +27,7 @@ dependencies {
     implementation(platform('org.springframework.boot:spring-boot-dependencies:2.5.4'))
     implementation("org.springframework.boot:spring-boot-starter")
 
-    implementation("org.springframework.vault:spring-vault-dependencies:2.3.2")
+    implementation(platform("org.springframework.vault:spring-vault-dependencies:2.3.2"))
     implementation("org.springframework.vault:spring-vault-core:2.3.2")
 
     // Use JUnit test framework.
