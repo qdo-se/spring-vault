@@ -1,4 +1,4 @@
-package qdo.vault;
+package qdo;
 
 import java.util.Map;
 
