@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="BASE_LOG_FILE_NAME" value="spring-vault.log"/>
+    <property name="BASE_ERROR_LOG_FILE_NAME" value="spring-vault_error.log"/>
+
+    <!-- Logs for local development should go to the console. -->
+    <springProfile name="default">
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!--
+        Logs for deploys in dev, test and production should go to a file.
+        We'll keep these around for 30 days.
+     -->
+    <springProfile name="development, test, production">
+        <appender name="ROLLING-FILE-ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <encoder>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <file>${LOG_PATH}/${BASE_LOG_FILE_NAME}</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/${BASE_LOG_FILE_NAME}.%d.gz</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <appender name="ROLLING-FILE-ERR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>ERROR</level>
+            </filter>
+            <encoder>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <file>${LOG_PATH}/${BASE_ERROR_LOG_FILE_NAME}</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/${BASE_ERROR_LOG_FILE_NAME}.%d.gz</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="ROLLING-FILE-ALL"/>
+            <appender-ref ref="ROLLING-FILE-ERR"/>
+        </root>
+    </springProfile>
+</configuration>
