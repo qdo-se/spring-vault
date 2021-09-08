@@ -1,18 +1,11 @@
 package qdo;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringVaultApplication implements CommandLineRunner {
-
+public class SpringVaultApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringVaultApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		// @TODO ???
 	}
 }
